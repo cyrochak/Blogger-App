@@ -1,0 +1,58 @@
+.gradient-background {
+  background: linear-gradient(300deg, #00bfff, #ff4c68, #ef8172);
+  background-size: 180% 180%;
+  animation: gradient-animation 18s ease infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+html{
+  display: block;
+}
+.container-footer{
+  background-color: white;
+  }
+body{
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    margin: 0;
+    background-color: black;
+    color: white;
+}
+
+div {
+    display: block;
+  }
+
+.container{
+  margin: 100px 350px;
+
+}
+.grid-container{
+  display: grid;
+grid-template-columns: 0.5fr 2fr;
+    grid-template-rows: 1fr 1fr ;
+    margin: 100px auto 0 auto;
+    text-align: left;
+    width: 70%;
+    row-gap: 2rem;
+  
+}
+
+h2{
+  text-align: center;
+}
+.cooking >img{
+  width: 200px;
+  height: 200px;
+  
+}

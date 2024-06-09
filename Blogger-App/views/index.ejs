@@ -1,0 +1,22 @@
+<%- include("partials/headers.ejs") %>
+<% if(locals.weather && locals.date && locals.text){ %>
+<h1>Post</h2>
+<h3>Weather: <%=weather%></h3>
+<h3>Date: <%=date%></h3>
+<p> <%= text%></p>
+<form action="/update" method="POST">
+    <input type="submit" value="Update">
+  </form>
+  <form action="/delete" method="POST">
+    <input type="submit" value="Delete">
+  </form>
+<% } else{ %>
+    <h1>Enter your Post below👇</h1>
+    <% } %>
+<form action="/submit" method="POST">
+    <input name="weather" type="text" class="feedback-input" placeholder="Weather" />
+    <input name="date" type="text" class="feedback-input date" placeholder="Date" />
+    <textarea name="text" class="feedback-input" placeholder="Comment"></textarea>
+    <input type="submit" value="Submit">
+  </form>
+<%- include("partials/footers.ejs") %>
