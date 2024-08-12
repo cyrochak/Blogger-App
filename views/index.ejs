@@ -1,22 +1,33 @@
 <%- include("partials/headers.ejs") %>
-<% if(locals.weather && locals.date && locals.text){ %>
-<h1>Post</h2>
-<h3>Weather: <%=weather%></h3>
-<h3>Date: <%=date%></h3>
-<p> <%= text%></p>
-<form action="/update" method="POST">
-    <input type="submit" value="Update">
-  </form>
-  <form action="/delete" method="POST">
-    <input type="submit" value="Delete">
-  </form>
-<% } else{ %>
-    <h1>Enter your Post below👇</h1>
-    <% } %>
-<form action="/submit" method="POST">
-    <input name="weather" type="text" class="feedback-input" placeholder="Weather" />
-    <input name="date" type="text" class="feedback-input date" placeholder="Date" />
-    <textarea name="text" class="feedback-input" placeholder="Comment"></textarea>
-    <input type="submit" value="Submit">
-  </form>
+<div class="container">
+
+<% posts.forEach(post => { %>
+    <h1><%= post.title %> </h1>
+    <h3><%= post.weather%> </h3>
+    <h3><%= post.date %> </h3>
+    <p>
+      <span class="preview"><%= post.content.substring(0, 100) + "..." %></span>
+      <a href="#" class="stretched-link" onclick="toggleContent(event, '<%= post.content %>')">Read More</a>
+  </p>
+  <div class="full-content" style="display: none;"></div> <!-- Container for full content -->
+  <% }); %>
+  
+  
+</div>
+<script>
+  function toggleContent(event, fullContent) {
+      event.preventDefault(); // Prevent the default link behavior
+
+      const fullContentDiv = event.target.closest('p').nextElementSibling; // Get the next div
+      if (fullContentDiv.style.display === "none") {
+          fullContentDiv.innerHTML = fullContent; // Set full content
+          fullContentDiv.style.display = "block"; // Show full content
+          event.target.innerText = "Read Less"; // Change link text
+      } else {
+          fullContentDiv.style.display = "none"; // Hide full content
+          event.target.innerText = "Read More"; // Change link text back
+      }
+  }
+  </script>
+
 <%- include("partials/footers.ejs") %>

@@ -1,0 +1,21 @@
+<%- include("partials/headers.ejs"); -%> 
+
+<h1>Compose</h1>
+<form action="/compose" method="POST">
+    <div class="form-group">
+        <label for="postTitle">Title</label>
+        <input type="text" class="form-control" name="postTitle">
+
+        <label for="weather">Weather</label>
+        <input type="text" class="form-control" name="weather">
+
+        <label for="date">Date</label>
+        <input type="date" class="form-control" name="date">
+        
+        <label for="postBody">Post</label>
+        <textarea name="postBody" class="form-control" cols="30" rows="5"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary" name="button">Publish</button>
+</form>
+
+<%- include("partials/footers.ejs"); -%> 

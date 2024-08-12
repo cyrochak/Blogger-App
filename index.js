@@ -7,7 +7,7 @@ const port = 3000;
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect("mongodb+srv://cyrochak:Benedict.2619@blogapi.wy4gwlp.mongodb.net/?retryWrites=true&w=majority&appName=BlogAPI/BLogDB");
+mongoose.connect("mongodb+srv://cyrochak:password@blogapi.wy4gwlp.mongodb.net/?retryWrites=true&w=majority&appName=BlogAPI/BLogDB");
 
 const postSchema = new mongoose.Schema({
   title: {
@@ -88,15 +88,6 @@ app.get("/posts/:postID", async (req, res) => {
       res.status(500).send('Server Error');
   }
 });
-// app.put("/update", (req, res) =>{
-  
-//     res.render("index.ejs", 
-//     {
-//       weather: req.body["weather"],
-//       date: req.body["date"],
-//       text: req.body["text"], 
-//     });
-// })
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
