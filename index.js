@@ -7,7 +7,7 @@ const port = 3000;
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect("mongodb+srv://cyrochak:password@blogapi.wy4gwlp.mongodb.net/?retryWrites=true&w=majority&appName=BlogAPI/BLogDB");
+mongoose.connect("mongodb+srv://username:password@blogapi.address.mongodb.net/?retryWrites=true&w=majority&appName=BlogAPI/BLogDB");
 
 const postSchema = new mongoose.Schema({
   title: {
@@ -56,20 +56,23 @@ app.get("/compose", (req, res) =>{
   res.render("compose.ejs");
 });
 
-app.post("/compose",function(req,res){
+app.post("/compose", async function(req, res) {
   const post = new Post({
-    title:req.body.postTitle,
-    weather:req.body.weather,
-    date:req.body.date,
-    content:req.body.postBody
+    title: req.body.postTitle,
+    weather: req.body.weather,
+    date: req.body.date,
+    content: req.body.postBody
   });
 
-  post.save(function(err){
-    if (!err){
-      res.redirect("/");
-    }
-  });
+  try {
+    await post.save();
+    res.redirect("/");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("An error occurred while saving the post.");
+  }
 });
+
 
 app.get("/posts/:postID", async (req, res) => {
   try {
@@ -78,7 +81,7 @@ app.get("/posts/:postID", async (req, res) => {
 
       if (!post) {
           // Handle case where post is not found
-          return res.status(404).render('404.ejs');
+          return res.status(404).send("Error 404 occured");
       }
 
       res.render("post.ejs", { post: post });
